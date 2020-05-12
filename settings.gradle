@@ -1,0 +1,5 @@
+rootProject.name='uklon-test'
+include ':app'
+include ':presentation'
+include ':data'
+include ':domain'
