@@ -1,6 +1,7 @@
 package com.frozenorb.uklon.test.presentation.posts.mapper
 
 import com.frozenorb.uklon.test.domain.post.entity.Post
+import com.frozenorb.uklon.test.domain.shared.Mapper
 import com.frozenorb.uklon.test.presentation.details.mapper.UiDomainCommentMapper
 import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
 import javax.inject.Inject

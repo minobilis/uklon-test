@@ -38,4 +38,6 @@ android {
 dependencies {
     implementation project(path: ':domain')
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

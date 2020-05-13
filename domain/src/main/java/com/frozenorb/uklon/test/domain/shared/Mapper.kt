@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts.mapper
+package com.frozenorb.uklon.test.domain.shared
 
 abstract class Mapper<From, To> {
 
