@@ -2,6 +2,7 @@ package com.frozenorb.uklon.test.presentation.posts
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -44,6 +45,8 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
                 navigator?.goToPostDetails(item.id)
             }
         }
+
+        swipe_refresh.setOnRefreshListener { postsViewModel.refreshPosts() }
     }
 
     override fun onAttach(context: Context) {
@@ -56,16 +59,20 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
     private fun subscribeToViewStates() {
         postsViewModel.postsViewState.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is PostsViewModel.PostsViewState.Loading ->
-                    posts_text.text = getString(R.string.loading)
-
-                is PostsViewModel.PostsViewState.Data -> {
-                    posts_text.text = ""
+                is PostsViewModel.PostsViewState.Loading -> {
+                    swipe_refresh.isRefreshing = true
                     postsAdapter.updateData(it.posts)
                 }
 
-                is PostsViewModel.PostsViewState.Error ->
-                    posts_text.text = it.error.message
+                is PostsViewModel.PostsViewState.Data -> {
+                    swipe_refresh.isRefreshing = false
+                    postsAdapter.updateData(it.posts)
+                }
+
+                is PostsViewModel.PostsViewState.Error ->{
+                    swipe_refresh.isRefreshing = false
+                    Toast.makeText(context, it.error.message, Toast.LENGTH_LONG).show()
+                }
             }
         })
     }

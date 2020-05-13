@@ -30,7 +30,7 @@ abstract class EmptyRequestSingleUseCase<Response>(
     }
 
     override fun dispose() {
-        if (!isDisposed) compositeDisposable.dispose()
+        if (!isDisposed) compositeDisposable.clear()
     }
 
     override fun isDisposed(): Boolean = compositeDisposable.isDisposed

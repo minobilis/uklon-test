@@ -12,16 +12,16 @@ class PostsViewModel @Inject constructor(
 ) : ViewModel() {
 
     sealed class PostsViewState {
-        class Data(val posts: List<UIPost>) : PostsViewState()
-        object Loading : PostsViewState()
-        class Error(val error: Throwable) : PostsViewState()
+        data class Data(val posts: List<UIPost>) : PostsViewState()
+        data class Loading(val posts: List<UIPost> = emptyList()) : PostsViewState()
+        data class Error(val error: Throwable) : PostsViewState()
     }
 
     private val _postsViewState = MutableLiveData<PostsViewState>()
     val postsViewState = _postsViewState
 
     fun loadPosts() {
-        _postsViewState.postValue(PostsViewState.Loading)
+        _postsViewState.postValue(PostsViewState.Loading(getViewStateData()))
         getPostsUseCase.execute(
             onSuccess = { _postsViewState.postValue(it.toDataViewState()) },
             onError = { _postsViewState.postValue(it.toErrorViewState()) }
@@ -32,13 +32,22 @@ class PostsViewModel @Inject constructor(
         PostsViewState.Data(
             postMapper.map(this)
         )
+
     private fun Throwable.toErrorViewState() =
         PostsViewState.Error(
             this
         )
 
+    private fun getViewStateData() =
+        (_postsViewState.value as? PostsViewState.Data)?.posts ?: emptyList()
+
     override fun onCleared() {
         super.onCleared()
         getPostsUseCase.dispose()
+    }
+
+    fun refreshPosts() {
+        getPostsUseCase.dispose()
+        loadPosts()
     }
 }
