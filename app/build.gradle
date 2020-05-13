@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: rootProject.file('shared.gradle')
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -23,12 +25,18 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation project(path: ':presentation')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.13'
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 }
