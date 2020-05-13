@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.di
+package com.frozenorb.uklon.test.presentation.posts.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

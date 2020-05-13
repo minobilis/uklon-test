@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Uklon Test App</string>
+    <string name="loading">Loading...</string>
 </resources>

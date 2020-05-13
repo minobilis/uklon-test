@@ -1,9 +1,9 @@
-package com.frozenorb.uklon.test.presentation.di.module;
+package com.frozenorb.uklon.test.presentation.posts.di.module;
 
 import androidx.lifecycle.ViewModel
 import com.frozenorb.uklon.test.domain.shared.di.scope.PerFragment
 import com.frozenorb.uklon.test.presentation.posts.PostsViewModel
-import com.frozenorb.uklon.test.presentation.di.PostsViewModelFactory
+import com.frozenorb.uklon.test.presentation.posts.di.factory.PostsViewModelFactory
 import com.frozenorb.uklon.test.presentation.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
