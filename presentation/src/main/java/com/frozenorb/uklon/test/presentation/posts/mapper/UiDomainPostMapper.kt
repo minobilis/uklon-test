@@ -1,13 +1,16 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.mapper
 
 import com.frozenorb.uklon.test.domain.post.entity.Post
+import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
 import javax.inject.Inject
 
-class UiDomainPostMapper @Inject constructor(): Mapper<Post, UIPost>() {
+class UiDomainPostMapper @Inject constructor(
+    private val userMapper: UiDomainUserMapper
+): Mapper<Post, UIPost>() {
     override fun map(from: Post): UIPost =
         UIPost(
             from.id,
-            from.userId,
+            userMapper.map(from.user),
             from.title,
             from.body
         )
@@ -15,7 +18,7 @@ class UiDomainPostMapper @Inject constructor(): Mapper<Post, UIPost>() {
     override fun reverse(to: UIPost): Post =
         Post(
             to.id,
-            to.userId,
+            userMapper.reverse(to.user),
             to.title,
             to.body
         )

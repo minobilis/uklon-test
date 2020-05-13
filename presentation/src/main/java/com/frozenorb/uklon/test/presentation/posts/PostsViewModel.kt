@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.frozenorb.uklon.test.domain.post.interactor.GetPostsUseCase
 import com.frozenorb.uklon.test.domain.post.entity.Post
+import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
+import com.frozenorb.uklon.test.presentation.posts.mapper.UiDomainPostMapper
 import javax.inject.Inject
 
 class PostsViewModel @Inject constructor(

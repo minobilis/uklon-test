@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frozenorb.uklon.test.presentation.R
 import com.frozenorb.uklon.test.presentation.posts.di.factory.PostsViewModelFactory
+import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
 import com.frozenorb.uklon.test.presentation.shared.Navigable
 import com.frozenorb.uklon.test.presentation.shared.Navigator
 import dagger.android.support.AndroidSupportInjection
@@ -38,7 +38,8 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
     }
 
     private fun setupUI() {
-        posts_recycler_view.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        posts_recycler_view.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         posts_recycler_view.adapter = postsAdapter
         postsAdapter.listener = object : PostsAdapter.Listener {
             override fun onItemClick(item: UIPost) {
@@ -52,8 +53,9 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-        if (context is Navigable) { navigator = Navigator(context) }
-        else throw RuntimeException("${context.javaClass.name} must implement ${Navigable::class.java.name} interface")
+        if (context is Navigable) {
+            navigator = Navigator(context)
+        } else throw RuntimeException("${context.javaClass.name} must implement ${Navigable::class.java.name} interface")
     }
 
     private fun subscribeToViewStates() {
@@ -69,7 +71,7 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
                     postsAdapter.updateData(it.posts)
                 }
 
-                is PostsViewModel.PostsViewState.Error ->{
+                is PostsViewModel.PostsViewState.Error -> {
                     swipe_refresh.isRefreshing = false
                     Toast.makeText(context, it.error.message, Toast.LENGTH_LONG).show()
                 }

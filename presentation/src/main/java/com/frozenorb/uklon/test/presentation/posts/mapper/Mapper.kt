@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.mapper
 
 abstract class Mapper<From, To> {
 

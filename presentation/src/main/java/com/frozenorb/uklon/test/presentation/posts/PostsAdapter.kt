@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.frozenorb.uklon.test.presentation.R
+import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
 import javax.inject.Inject
 
 
@@ -22,8 +23,10 @@ class PostsAdapter @Inject constructor() : RecyclerView.Adapter<PostsViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
-        return PostsViewHolder(LayoutInflater.from(parent.context)
-                .inflate(R.layout.posts_item, parent, false))
+        return PostsViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.posts_item, parent, false)
+        )
     }
 
     override fun getItemCount(): Int = data.size
@@ -38,8 +41,9 @@ class PostsAdapter @Inject constructor() : RecyclerView.Adapter<PostsViewHolder>
     }
 
     class PostsDiffUtil internal constructor(
-            private var oldList: List<UIPost>,
-            private var newList: List<UIPost>) : DiffUtil.Callback() {
+        private var oldList: List<UIPost>,
+        private var newList: List<UIPost>
+    ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
 
