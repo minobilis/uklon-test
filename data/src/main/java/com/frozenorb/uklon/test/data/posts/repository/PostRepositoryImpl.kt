@@ -36,7 +36,8 @@ class PostRepositoryImpl @Inject constructor():
                         "website0"
                     ),
                     "Title 0",
-                    "Some body 0"
+                    "Some body 0",
+                    emptyList()
                 ),
                 Post(
                     1,
@@ -64,7 +65,8 @@ class PostRepositoryImpl @Inject constructor():
                         "website1"
                     ),
                     "Title 1",
-                    "Some body 1"
+                    "Some body 1",
+                    emptyList()
                 ),
                 Post(
                     2,
@@ -92,7 +94,8 @@ class PostRepositoryImpl @Inject constructor():
                         "website2"
                     ),
                     "Title 2",
-                    "Some body 2"
+                    "Some body 2",
+                    emptyList()
                 )
             )
         )

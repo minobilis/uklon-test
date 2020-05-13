@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.view
 
 import android.content.Context
 import android.os.Bundle
@@ -11,18 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frozenorb.uklon.test.presentation.R
 import com.frozenorb.uklon.test.presentation.posts.di.factory.PostsViewModelFactory
 import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
+import com.frozenorb.uklon.test.presentation.posts.viewmodel.PostsViewModel
 import com.frozenorb.uklon.test.presentation.shared.Navigable
 import com.frozenorb.uklon.test.presentation.shared.Navigator
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.posts_fragment.*
-import java.lang.RuntimeException
 import javax.inject.Inject
 
 class PostsFragment : Fragment(R.layout.posts_fragment) {
 
     private var navigator: Navigator? = null
 
-    private val postsAdapter = PostsAdapter()
+    private val postsAdapter =
+        PostsAdapter()
 
     @Inject
     lateinit var postsViewModelFactory: PostsViewModelFactory
@@ -41,9 +42,10 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
         posts_recycler_view.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         posts_recycler_view.adapter = postsAdapter
-        postsAdapter.listener = object : PostsAdapter.Listener {
-            override fun onItemClick(item: UIPost) {
-                navigator?.goToPostDetails(item.id)
+        postsAdapter.listener = object :
+            PostsAdapter.Listener {
+            override fun onItemClick(post: UIPost) {
+                navigator?.goToPostDetails(post.id, post.user.id)
             }
         }
 
@@ -80,6 +82,7 @@ class PostsFragment : Fragment(R.layout.posts_fragment) {
     }
 
     companion object {
-        fun newInstance(): PostsFragment = PostsFragment()
+        fun newInstance(): PostsFragment =
+            PostsFragment()
     }
 }

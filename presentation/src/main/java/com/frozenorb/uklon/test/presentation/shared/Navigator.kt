@@ -2,8 +2,8 @@ package com.frozenorb.uklon.test.presentation.shared
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.frozenorb.uklon.test.presentation.PostDetailsFragment
-import com.frozenorb.uklon.test.presentation.posts.PostsFragment
+import com.frozenorb.uklon.test.presentation.details.view.PostDetailsFragment
+import com.frozenorb.uklon.test.presentation.posts.view.PostsFragment
 import javax.inject.Inject
 
 class Navigator @Inject constructor(private val navigable: Navigable) {
@@ -17,12 +17,12 @@ class Navigator @Inject constructor(private val navigable: Navigable) {
         }
     }
 
-    fun goToPostDetails(postId: Long) {
+    fun goToPostDetails(postId: Long, userId: Long) {
         navigable.acquireFragmentManager().commit {
             addToBackStack(PostDetailsFragment::class.java.simpleName)
             replace(
                 navigable.getFragmentContainerId(),
-                PostDetailsFragment.newInstance(postId)
+                PostDetailsFragment.newInstance(postId, userId)
             )
         }
     }

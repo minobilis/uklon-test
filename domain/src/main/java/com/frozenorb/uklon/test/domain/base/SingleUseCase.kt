@@ -15,8 +15,8 @@ abstract class SingleUseCase<Request, Response>(
 
     fun execute(
         request: Request,
-        onSuccess: () -> Unit = {},
-        onError: () -> Unit = {}
+        onSuccess: (it: Response) -> Unit = {},
+        onError: (it: Throwable) -> Unit = {}
     ) {
 
         compositeDisposable.add(
@@ -24,14 +24,14 @@ abstract class SingleUseCase<Request, Response>(
                 .subscribeOn(executionScheduler)
                 .observeOn(responseScheduler)
                 .subscribe(
-                    { onSuccess() },
-                    { onError() }
+                    { onSuccess(it) },
+                    { onError(it) }
                 )
         )
     }
 
     override fun dispose() {
-        if (!isDisposed) compositeDisposable.dispose()
+        if (!isDisposed) compositeDisposable.clear()
     }
 
     override fun isDisposed(): Boolean = compositeDisposable.isDisposed

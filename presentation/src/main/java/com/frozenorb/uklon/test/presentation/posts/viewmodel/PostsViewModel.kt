@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +23,11 @@ class PostsViewModel @Inject constructor(
     val postsViewState = _postsViewState
 
     fun loadPosts() {
-        _postsViewState.postValue(PostsViewState.Loading(getViewStateData()))
+        _postsViewState.postValue(
+            PostsViewState.Loading(
+                getViewStateData()
+            )
+        )
         getPostsUseCase.execute(
             onSuccess = { _postsViewState.postValue(it.toDataViewState()) },
             onError = { _postsViewState.postValue(it.toErrorViewState()) }

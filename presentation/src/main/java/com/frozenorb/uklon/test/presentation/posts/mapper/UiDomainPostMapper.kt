@@ -1,18 +1,21 @@
 package com.frozenorb.uklon.test.presentation.posts.mapper
 
 import com.frozenorb.uklon.test.domain.post.entity.Post
+import com.frozenorb.uklon.test.presentation.details.mapper.UiDomainCommentMapper
 import com.frozenorb.uklon.test.presentation.posts.entity.UIPost
 import javax.inject.Inject
 
 class UiDomainPostMapper @Inject constructor(
-    private val userMapper: UiDomainUserMapper
+    private val userMapper: UiDomainUserMapper,
+    private val commentMapper: UiDomainCommentMapper
 ): Mapper<Post, UIPost>() {
     override fun map(from: Post): UIPost =
         UIPost(
             from.id,
             userMapper.map(from.user),
             from.title,
-            from.body
+            from.body,
+            commentMapper.map(from.comments)
         )
 
     override fun reverse(to: UIPost): Post =
@@ -20,6 +23,7 @@ class UiDomainPostMapper @Inject constructor(
             to.id,
             userMapper.reverse(to.user),
             to.title,
-            to.body
+            to.body,
+            commentMapper.reverse(to.comments)
         )
 }

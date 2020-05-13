@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

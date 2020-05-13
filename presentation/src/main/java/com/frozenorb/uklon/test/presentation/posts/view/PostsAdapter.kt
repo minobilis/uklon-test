@@ -1,4 +1,4 @@
-package com.frozenorb.uklon.test.presentation.posts
+package com.frozenorb.uklon.test.presentation.posts.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,7 +16,12 @@ class PostsAdapter @Inject constructor() : RecyclerView.Adapter<PostsViewHolder>
     private val data = mutableListOf<UIPost>()
 
     fun updateData(newData: List<UIPost>) {
-        val diffResult = DiffUtil.calculateDiff(PostsDiffUtil(this.data, newData))
+        val diffResult = DiffUtil.calculateDiff(
+            PostsDiffUtil(
+                this.data,
+                newData
+            )
+        )
         diffResult.dispatchUpdatesTo(this)
         this.data.clear()
         this.data.addAll(newData)
@@ -37,7 +42,7 @@ class PostsAdapter @Inject constructor() : RecyclerView.Adapter<PostsViewHolder>
     }
 
     interface Listener {
-        fun onItemClick(item: UIPost)
+        fun onItemClick(post: UIPost)
     }
 
     class PostsDiffUtil internal constructor(
