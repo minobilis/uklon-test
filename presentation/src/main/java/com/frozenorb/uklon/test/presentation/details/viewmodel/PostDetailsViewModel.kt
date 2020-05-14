@@ -68,6 +68,11 @@ class PostDetailsViewModel @Inject constructor(
         )
     }
 
+    fun refreshUser(userId: Long) {
+        getUserUseCase.dispose()
+        loadUser(userId)
+    }
+
     private fun List<Comment>.toCommentsDataViewState(postId: Long) =
         CommentsViewState.Data(
             commentMapper.map(this)

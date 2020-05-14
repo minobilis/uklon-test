@@ -38,7 +38,10 @@ class PostDetailsFragment : Fragment(R.layout.post_details_fragment) {
     }
 
     private fun setupUI() {
-        swipe_refresh.setOnRefreshListener { postDetailsViewModel.refreshComments(postId) }
+        swipe_refresh.setOnRefreshListener {
+            postDetailsViewModel.refreshComments(postId)
+            postDetailsViewModel.refreshUser(userId)
+        }
         comments_recycler_view.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = commentsAdapter
