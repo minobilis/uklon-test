@@ -2,6 +2,7 @@ package com.frozenorb.uklon.test.data.posts.api
 
 import com.frozenorb.uklon.test.data.posts.entity.ApiComment
 import com.frozenorb.uklon.test.data.posts.entity.ApiPost
+import com.frozenorb.uklon.test.data.posts.entity.ApiUser
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,4 +15,7 @@ interface PostsService {
 
     @GET("posts/{postId}/comments")
     fun getComments(@Path("postId") postId: Long): Single<Response<List<ApiComment>>>
+
+    @GET("users/{userId}")
+    fun getUser(@Path("userId") user: Long): Single<Response<ApiUser>>
 }
