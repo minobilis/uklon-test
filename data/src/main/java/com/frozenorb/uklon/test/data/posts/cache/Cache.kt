@@ -16,4 +16,6 @@ interface Cache {
     fun getUser(userId: Long): Single<User>
 
     fun addUser(user: User)
+
+    fun addComments(comments: List<Comment>)
 }

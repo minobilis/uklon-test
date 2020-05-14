@@ -10,7 +10,7 @@ class CacheImpl @Inject constructor() : Cache {
 
     private val posts = mutableSetOf<Post>()
     private val users = mutableListOf<User>()
-    private val comments = mutableListOf<Comment>()
+    private val comments = mutableSetOf<Comment>()
 
     override fun getPosts(): Single<List<Post>> {
         return when {
@@ -24,9 +24,15 @@ class CacheImpl @Inject constructor() : Cache {
     }
 
     override fun getComments(postId: Long): Single<List<Comment>> {
-        return Single.fromCallable {
-            comments.filter { it.postId == postId }
+        val filteredComments = comments.filter { it.postId == postId }
+        return when {
+            filteredComments.isEmpty() -> Single.error(NoCommentsException())
+            else -> Single.fromCallable { filteredComments }
         }
+    }
+
+    override fun addComments(comments: List<Comment>) {
+        this.comments.addAll(comments)
     }
 
     override fun getUser(userId: Long): Single<User> {
