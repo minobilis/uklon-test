@@ -12,6 +12,7 @@ class ApiDomainPostMapper @Inject constructor(
         ApiPost(
             from.id,
             userMapper.map(from.user),
+            from.user.id,
             from.title,
             from.body
         )
@@ -19,7 +20,7 @@ class ApiDomainPostMapper @Inject constructor(
     override fun reverse(to: ApiPost?): Post =
         Post(
             to?.id ?: -1,
-            userMapper.reverse(to?.user),
+            userMapper.reverse(to?.user, to?.userId),
             to?.title ?: "",
             to?.body ?: "",
             emptyList()

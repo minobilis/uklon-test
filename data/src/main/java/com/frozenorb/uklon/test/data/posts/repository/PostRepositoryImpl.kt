@@ -14,6 +14,6 @@ class PostRepositoryImpl @Inject constructor(
     PostRepository {
     override fun getPosts(): Single<List<Post>> =
         api.getPosts().map {
-            postMapper.reverse(it.body() ?: emptyList())
+            postMapper.reverse(it.body() ?: emptyList()).map { it }
         }
 }

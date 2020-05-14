@@ -32,4 +32,16 @@ class ApiDomainUserMapper @Inject constructor(
             to?.username ?: "",
             to?.website ?: ""
         )
+
+    fun reverse(to: ApiUser?, userId: Long?): User =
+        User(
+            addressMapper.reverse(to?.address),
+            companyMapper.reverse(to?.company),
+            to?.email ?: "",
+            to?.id ?: userId ?: -1,
+            to?.name ?: "",
+            to?.phone ?: "",
+            to?.username ?: "",
+            to?.website ?: ""
+        )
 }
