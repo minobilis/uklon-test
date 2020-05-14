@@ -8,14 +8,19 @@ import javax.inject.Inject
 
 class CacheImpl @Inject constructor() : Cache {
 
-    private val posts = mutableListOf<Post>()
+    private val posts = mutableSetOf<Post>()
     private val users = mutableListOf<User>()
     private val comments = mutableListOf<Comment>()
 
     override fun getPosts(): Single<List<Post>> {
-        return Single.fromCallable {
-            posts
+        return when {
+            posts.isEmpty() -> Single.error(NoPostsException())
+            else -> Single.fromCallable { posts.toList() }
         }
+    }
+
+    override fun addPosts(posts: List<Post>) {
+        this.posts.addAll(posts)
     }
 
     override fun getComments(postId: Long): Single<List<Comment>> {

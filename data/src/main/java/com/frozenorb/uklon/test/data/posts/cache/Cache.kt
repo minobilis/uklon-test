@@ -9,6 +9,8 @@ interface Cache {
 
     fun getPosts(): Single<List<Post>>
 
+    fun addPosts(posts: List<Post>)
+
     fun getComments(postId: Long): Single<List<Comment>>
 
     fun getUser(userId: Long): Single<User>
